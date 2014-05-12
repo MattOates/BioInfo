@@ -1,0 +1,9 @@
+{
+    "name" : "BioInfo",
+    "version" : "0.0.1",
+    "description" : "Bioinformatics modules written specifically for Perl6. This is not BioPerl, for something that has a more compatible API checkout the module 'bioperl6' maintained by Chris Fields. These modules are biased towards working with amino acid sequences at the moment. Of general use is a non-blocking and concurrent FASTA parser for working with Perl6 Promises.",
+    "author" : "Matt Oates",
+    "depends" : [ ],
+    "source-type" : "git",
+    "source-url" : "git://github.com/MattOates/BioInfo.git"
+}
