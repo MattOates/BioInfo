@@ -1,7 +1,7 @@
 BioInfo
 =========
 
-BioInfo is a reimagining of bioinformatics libraries for Perl based on all the new goodies available such as parallel processing through Promises and Channels. Not to be confused with the [bioperl6] project lead by [Chris Fields] which aims to be a reimplementation of the BioPerl API for Perl6. Checkout Chris' project for any serious business.
+BioInfo is a reimagining of bioinformatics libraries for Perl based on all the new goodies available such as parallel processing through Promises and Channels and well defined and extensible parsing with the use of Grammars. Not to be confused with the [bioperl6] project lead by [Chris Fields] which aims to be a reimplementation of the BioPerl API for Perl6. Checkout Chris' project for any serious business.
 
 
 ###The Good
