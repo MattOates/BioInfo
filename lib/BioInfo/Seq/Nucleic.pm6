@@ -72,7 +72,7 @@ class BioInfo::Seq::Nucleic is BioInfo::Seq {
                 $seq = $seq.translate;
 
                 for $seq.sequence.comb(/<-[\*]>+/).kv -> $index, $orf {
-                    @frames.push($seq.new(id => $seq.id ~ "orf" ~ $index + 1, comment => $seq.comment, sequence => $orf)) if $orf.chars >= $min-length;
+                    @frames.push($seq.new(id => $seq.id ~ "_" ~ $index + 1, comment => $seq.comment, sequence => $orf)) if $orf.chars >= $min-length;
                 }
             }
             #Otherwise just push the whole frame translation
