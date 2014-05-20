@@ -8,6 +8,7 @@ Please do! Seriously if it's sane and looks like reasonable Perl6 I will likely 
 - Make a little six-frame translator script using the library
 - Get some Newick Actions together along with some very very basic PhyloTree classes
 - Actually do some design, perhaps via TDD
+- Make some delicious POD6 inline documentation
 
 ###Low Hanging (Juicy) Fruit For Anyone
 - Add methods/attributes to various sequence classes, could be anything!
