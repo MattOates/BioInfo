@@ -43,7 +43,7 @@ while (my $seq = $channel.get()) {
 Installation is quite simple at the moment, but might become more involved once third party software is involved.
 
 ### With panda (part of the Rakudo* distribution)
-
+###### I havent added this to the Panda modules listings yet... When it is:
 ```sh
 panda install BioInfo
 perl6 -M BioInfo -e 'say BioInfo::Seq.new(id => "seq1", sequence => "MDADAFA");'
