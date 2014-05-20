@@ -1,14 +1,12 @@
 use BioInfo::Parser;
-use BioInfo::Parser::FASTA::Grammar;
-use BioInfo::Parser::FASTA::Actions;
 
-class BioInfo::Seq::IOChannel {
+class BioInfo::IO::FileParseChannel {
     has BioInfo::Parser $!parser;
     has $!channel;
     has $!io_promise;
     has $!fh;
 
-    submethod BUILD(:$file,:$parser) {
+    submethod BUILD(:$file, :$parser) {
         $!parser = $parser;
         $!fh = open($file,:!chomp,:r);
         $!channel = Channel.new();
@@ -18,8 +16,8 @@ class BioInfo::Seq::IOChannel {
             for $!fh.lines -> $line {
                 if $line.index($!parser.rec-start).defined {
                     if $in-record {
-                        for $!parser.grammar.parse($record,actions => $!parser.actions).ast -> $seq {
-                            $!channel.send($seq);
+                        for $!parser.grammar.parse($record,actions => $!parser.actions).ast -> $obj {
+                            $!channel.send($obj);
                         }
                         $record = '';
                     } else {
