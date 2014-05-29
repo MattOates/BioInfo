@@ -1,13 +1,13 @@
 use BioInfo::Seq;
 use BioInfo::Seq::Amino;
 
-class X::BioInfo::WholeCodon is Exception {
+my class X::BioInfo::WholeCodon is Exception {
     method message() {
         "Expected whole codon sequence, but the Nucleic acid sequence length received was not divisible by 3.";
     }
 }
 
-class BioInfo::Seq::Nucleic is BioInfo::Seq {
+class BioInfo::Seq::Nucleic does BioInfo::Seq {
 
     has @.residues;
 
@@ -24,7 +24,7 @@ class BioInfo::Seq::Nucleic is BioInfo::Seq {
 
         #Get all the combinations of bases that map to the @aminos ordering
         #TTT TTC TTA TTG TCT TCC ... GGT GGC GGA GGG
-        #my @codons = [X~] @.residues.item xx 3; #TODO work out why this no longer works?
+            #my @codons = [X~] @.residues.item xx 3; #TODO work out why this no longer works?
         my @codons = map *~*~*, (@.residues X @.residues X @.residues);
 
         #Translation table
