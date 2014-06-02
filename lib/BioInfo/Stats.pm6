@@ -1,6 +1,7 @@
 use v6;
 package BioInfo::Stats {
 
+    #Mean average
     proto sub mean($ --> Real) is export {*}
     multi sub mean(Baggy $x --> Real) {
         ( [+] $x.kv.map({$^k * $^v}) ) / $x.total;
@@ -9,22 +10,7 @@ package BioInfo::Stats {
         ( [+] $x.list ) / $x.elems;
     }
 
-    proto sub quartiles($ --> Parcel) is export {*}
-    multi sub quartiles(Positional $x --> Parcel) {
-        $x := $x.sort;
-        (
-        median($x[0..floor($x.elems/2)-1]),
-        median($x),
-        median($x[ceiling($x.elems/2)..$x.elems-1])
-        )
-    }
-
-    proto sub iqr($ --> Real) is export {*}
-    multi sub iqr(Positional $x --> Real) {
-        my ($q1,Nil,$q2) = quartiles($x);
-        return $q2-$q1;
-    }
-
+    #Median average
     proto sub median($ --> Real) is export {*}
     multi sub median(Baggy $x --> Real) {
         #TODO Can do a lot better here by sorting by key and consuming half by value
@@ -58,16 +44,36 @@ package BioInfo::Stats {
         }
     }
 
+    #Quartiles (Q1, Q2/Median, Q3)
+    proto sub quartiles($ --> Parcel) is export {*}
+    multi sub quartiles(Positional $x --> Parcel) {
+        $x := $x.sort;
+        (
+        median($x[0..floor($x.elems/2)-1]),
+        median($x),
+        median($x[ceiling($x.elems/2)..$x.elems-1])
+        )
+    }
+
+    #Inter-quartile range
+    proto sub iqr($ --> Real) is export {*}
+    multi sub iqr(Positional $x --> Real) {
+        my ($q1,Nil,$q2) = quartiles($x);
+        return $q2-$q1;
+    }
+
+    #Variance
     proto sub variance($ --> Real) is export {*}
     multi sub variance(Baggy $x --> Real) {
         my $mean = mean($x);
         ( [+] $x.kv.map({(($^k - $mean)**2)*$^v}) ) / $x.total;
     }
-    multi sub variance(Positional $x) {
+    multi sub variance(Positional $x --> Real) {
         my $mean = mean($x);
-        ([+] $x.map({($_ - $mean)**2}) ) / $x.elems;
+        ( [+] $x.map({($_ - $mean)**2}) ) / $x.elems;
     }
 
+    #Standarad Deviation
     proto sub sd($ --> Real) is export {*}
     multi sub sd(Baggy $x --> Real) {
         sqrt(variance($x));
@@ -76,6 +82,30 @@ package BioInfo::Stats {
         sqrt(variance($x));
     }
 
+    #Mean Absolute Deviation
+    proto sub mean-ad($ --> Real) is export {*}
+    multi sub mean-ad(Baggy $x --> Real) {
+        my $mean = mean($x);
+        ( [+] $x.kv.map({ abs($^k - $mean) *$^v }) ) / $x.total;
+    }
+    multi sub mean-ad(Positional $x --> Real) {
+        my $mean = mean($x);
+        ( [+] $x.map({ abs($_ - $mean) }) ) / $x.elems;
+    }
+
+    #Median Absolute Deviation
+    proto sub median-ad($ --> Real) is export {*}
+    multi sub median-ad(Baggy $x --> Real) {
+        my $median = median($x);
+        #TODO look into using the Bag form of the median here too
+        median( $x.kv.map({ abs($^k - $median) xx $^v }) );
+    }
+    multi sub median-ad(Positional $x --> Real) {
+        my $median = median($x);
+        median( $x.map({ abs($_ - $median) }) );
+    }
+
+    #Summary statistics Rlang style
     proto sub summary($ --> Parcel) is export {*}
     multi sub summary(Positional $x --> Parcel) {
         my $median = median($x);
@@ -88,6 +118,7 @@ package BioInfo::Stats {
         )
     }
 
+    #Calculate a binned histogram of the data
     proto sub hist($ --> Parcel) is export {*}
     multi sub hist(Positional $x, :$breaks('') --> Parcel) {
         my $bin-width;
