@@ -44,6 +44,16 @@ package BioInfo::Stats {
         }
     }
 
+    #Mode average
+    proto sub mode($ --> Parcel) is export {*}
+    multi sub mode(Baggy $x --> Parcel) {
+        my $mode_freq = $x.values.max;
+        $x.pairs.grep({.value == $mode_freq}).map({.key}).sort;
+    }
+    multi sub mode(Positional $x --> Parcel) {
+        mode(bag $x.list);
+    }
+
     #Quartiles (Q1, Q2/Median, Q3)
     proto sub quartiles($ --> Parcel) is export {*}
     multi sub quartiles(Positional $x --> Parcel) {
