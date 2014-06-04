@@ -1,6 +1,6 @@
 use v6;
 use Test;
-plan 16;
+plan 18;
 
 #Basic sanity tests for the stats functions, no real coverage of edge cases
 use BioInfo::Stats;
@@ -24,6 +24,8 @@ use BioInfo::Stats;
     ok sd(@positional_x) == sd($baggy_x), 'Standard deviation for Bag and Array is identical.';
     ok mean-ad(@positional_x) == mean-ad($baggy_x), 'Mean Absolute Deviation for Bag and Array is identical.';
     ok median-ad(@positional_x) == median-ad($baggy_x), 'Median Absolute Deviation for Bag and Array is identical.';
+    ok zscores(@positional_x) == zscores($baggy_x), 'Z-scores for Bag and Array is identical.';
+    ok zscore(10,@positional_x) == zscore(10,$baggy_x), 'Z-score given background for Bag and Array is identical.';
 }
 
 done;

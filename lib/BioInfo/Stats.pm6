@@ -45,18 +45,18 @@ package BioInfo::Stats {
     }
 
     #Mode average
-    proto sub mode($ --> Parcel) is export {*}
-    multi sub mode(Baggy $x --> Parcel) {
+    proto sub mode($ --> Positional) is export {*}
+    multi sub mode(Baggy $x --> Positional) {
         my $mode_freq = $x.values.max;
         $x.pairs.grep({.value == $mode_freq}).map({.key}).sort;
     }
-    multi sub mode(Positional $x --> Parcel) {
+    multi sub mode(Positional $x --> Positional) {
         mode(bag $x.list);
     }
 
     #Quartiles (Q1, Q2/Median, Q3)
-    proto sub quartiles($ --> Parcel) is export {*}
-    multi sub quartiles(Positional $x --> Parcel) {
+    proto sub quartiles($ --> Positional) is export {*}
+    multi sub quartiles(Positional $x --> Positional) {
         $x := $x.sort;
         (
         median($x[0..floor($x.elems/2)-1]),
@@ -115,9 +115,31 @@ package BioInfo::Stats {
         median( $x.map({ abs($_ - $median) }) );
     }
 
+    #Map data values to their zscores as a list of pairs
+    proto sub zscores($ --> Positional) is export {*}
+    multi sub zscores(Baggy $x --> Positional) {
+        my $mean = mean($x);
+        my $sd = sd($x);
+        $x.pairs.map({$_.key => ($_.key - $mean) / $sd }).sort({$^a.value <=> $^b.value});
+    }
+    multi sub zscores(Positional $x --> Positional) {
+        my $mean = mean($x);
+        my $sd = sd($x);
+        $x.map({$_ => ($_ - $mean) / $sd }).sort({$^a.value <=> $^b.value}).squish(as => {.key});
+    }
+
+    #Get the zscore for a new value given a previous sample of observations
+    #This is a common way of ranking new observations on how over or under represented they are given a background
+    proto sub zscore($,$ --> Positional) is export {*}
+    multi sub zscore(Numeric $x, $X where $X.WHAT ~~ Baggy|Positional --> Real) {
+        my $mean = mean($X);
+        my $sd = sd($X);
+        ($x - $mean) / $sd;
+    }
+
     #Summary statistics Rlang style
-    proto sub summary($ --> Parcel) is export {*}
-    multi sub summary(Positional $x --> Parcel) {
+    proto sub summary($ --> Positional) is export {*}
+    multi sub summary(Positional $x --> Positional) {
         my $median = median($x);
         (
         'mean'=>mean($x),
@@ -129,8 +151,8 @@ package BioInfo::Stats {
     }
 
     #Calculate a binned histogram of the data
-    proto sub hist($ --> Parcel) is export {*}
-    multi sub hist(Positional $x, :$breaks('') --> Parcel) {
+    proto sub hist($ --> Positional) is export {*}
+    multi sub hist(Positional $x, :$breaks('') --> Positional) {
         my $bin-width;
         given $breaks {
             when 'Doane' {*} #Looks cool but needs some other dist related functions
