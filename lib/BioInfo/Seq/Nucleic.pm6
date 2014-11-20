@@ -29,14 +29,14 @@ class BioInfo::Seq::Nucleic does BioInfo::Seq {
 
         #Translation table
         #TODO add in the weirdy-beardy translation tables
-        my %aminos = {standard => <F F L L S S S S
+        my %aminos = (standard => <F F L L S S S S
                                    Y Y * * C C * W
                                    L L L L P P P P
                                    H H Q Q R R R R
                                    I I I M T T T T
                                    N N K K S S R R
                                    V V V V A A A A
-                                   D D E E G G G G>};
+                                   D D E E G G G G>);
 
         #Create a map of the codons to amino acids
         #Anything non translatable like '-' or 'N' get mapped to X amino characters
