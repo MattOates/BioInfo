@@ -24,13 +24,13 @@ BioInfo is a reimagining of bioinformatics libraries for Perl6 based on all the 
 
 ```perl6
 use BioInfo::Parser::FASTA;
-use BioInfo::IO::FileParseChannel;
+use BioInfo::IO::FileParser;
 
 #Spawn an IO thread that parses the file and creates BioInfo::Seq objects on .get
-my $channel = BioInfo::IO::FileParseChannel.new(file => 'myseqs.fa', parser => BioInfo::Parser::FASTA);
+my $seq_file = BioInfo::IO::FileParser.new(file => 'myseqs.fa', parser => BioInfo::Parser::FASTA);
 
 #Print all the IDs from the sequence file
-while (my $seq = $channel.get()) {
+while (my $seq = $seq_file.get()) {
     say $seq.id;
 }
 
