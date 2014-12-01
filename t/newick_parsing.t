@@ -3,11 +3,11 @@ use Test;
 plan 1;
 
 use BioInfo::Parser::Newick;
-use BioInfo::IO::FileParseChannel;
+use BioInfo::IO::FileParser;
 
 {
-    my $treechan = BioInfo::IO::FileParseChannel.new(file => 't_data/quoted.nwk', parser => BioInfo::Parser::Newick);
-    isa_ok $treechan, BioInfo::IO::FileParseChannel, 'Created Newick File IO Channel successfully.';
+    my $treechan = BioInfo::IO::FileParser.new(file => 't_data/quoted.nwk', parser => BioInfo::Parser::Newick);
+    isa_ok $treechan, BioInfo::IO::FileParser, 'Created Newick File IO Channel successfully.';
 }
 
 done;

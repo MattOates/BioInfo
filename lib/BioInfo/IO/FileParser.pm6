@@ -1,6 +1,6 @@
 use BioInfo::Parser;
 
-class BioInfo::IO::FileParseChannel {
+class BioInfo::IO::FileParser {
     has BioInfo::Parser $!parser;
     has $!channel;
     has $!io_promise;
