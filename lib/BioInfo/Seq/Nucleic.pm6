@@ -15,7 +15,11 @@ class BioInfo::Seq::Nucleic does BioInfo::Seq {
         my %comp = zip @.residues, (@.residues[2,3], @.residues[0,1]);
         my $seq = self.sequence;
         $seq = $seq.flip if $reverse;
-        self.new(id => self.id, comment => self.comment, sequence => $seq.comb.map({%comp{$_}}).join);
+        self.new(
+            id => self.id, 
+            comment => self.comment, 
+            sequence => $seq.comb.map({%comp{$_}}).join
+        );
     }
 
     #Method to in-frame translate
@@ -51,9 +55,9 @@ class BioInfo::Seq::Nucleic does BioInfo::Seq {
         );
     }
 
-    method three-frame-translate(:$min-length=1,:$break-on-stop, :$negative) {
+    method three-frame-translate(:$min-length=1, :$break-on-stop, :$negative) {
         my @frames;
-        for 0..2 -> $frame_shift {
+        for 0..2 -> $frame {
             my $seq;
             if ($negative) {
                 $seq = (self.complement :reverse).sequence;
@@ -61,11 +65,11 @@ class BioInfo::Seq::Nucleic does BioInfo::Seq {
                 $seq = self.sequence;
             }
             #Start this frame shifted by the frame shift ammount
-            $seq = $seq.substr($frame_shift);
+            $seq = $seq.substr($frame);
             #Chop off the end until we have whole codon length
             $seq = $seq.chop while $seq.chars % 3;
             #Create a new sequence object with the frame postfixed to the ID
-            $seq = self.new(id => self.id ~ $frame_shift + 1, comment => self.comment, sequence => $seq);
+            $seq = self.new(id => self.id ~ $frame + 1, comment => self.comment, sequence => $seq);
 
             #If breaking on stop codon was requested split this sequence up further into ORFs
             if ($break-on-stop) {
