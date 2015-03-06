@@ -1,10 +1,9 @@
 use QAST:from<NQP>;
  
 sub BioInfo::seq(Str $sequence) is export {
-use BioInfo::Parser::FASTA::Grammar;
-use BioInfo::Parser::FASTA::Actions;
-say $sequence;
-BioInfo::Parser::FASTA::Grammar.parse($sequence, actions => BioInfo::Parser::FASTA::Actions).ast;
+    use BioInfo::Parser::FASTA::Grammar;
+    use BioInfo::Parser::FASTA::Actions;
+    BioInfo::Parser::FASTA::Grammar.parse($sequence, actions => BioInfo::Parser::FASTA::Actions).ast;
 }
  
 sub EXPORT(|) {
