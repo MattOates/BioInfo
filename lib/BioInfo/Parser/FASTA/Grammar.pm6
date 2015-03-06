@@ -1,6 +1,6 @@
 grammar BioInfo::Parser::FASTA::Grammar {
     token TOP {
-        <record>+
+        <.ws> <record>+ || <sequence>
     }
 
     token record {
@@ -15,14 +15,17 @@ grammar BioInfo::Parser::FASTA::Grammar {
     }
 
     proto token sequence {*}
-    token sequence:sym<aa> {
-        <[A..Z\*\-\n]>+
-    }
     token sequence:sym<dna> {
         <[ACGTRYKMSWBDHVNX\-\n]>+
     }
     token sequence:sym<rna> {
         <[ACGURYKMSWBDHVNX\-\n]>+
+    }
+    token sequence:sym<aa> {
+        <[A..Z\*\-\n]>+
+    }
+    token sequence:sym<seq> {
+        <-[>]>+
     }
 
 }

@@ -1,7 +1,7 @@
 role BioInfo::Seq {
-    has Str $.id = "";
-    has Str $.comment = "";
-    has Str $.sequence = "";
+    has Str $.id is rw = "";
+    has Str $.comment is rw = "";
+    has Str $.sequence is rw = "";
 
     multi method Numeric (BioInfo::Seq:D: --> Numeric) {
         $.sequence.codes;
