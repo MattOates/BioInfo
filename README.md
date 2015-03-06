@@ -38,7 +38,7 @@ while (my $seq = $seq_file.get()) {
 
 ```
 
-Using the BioInfo slang to seamlessly manipulate sequences in your code:
+Using the BioInfo slang to seamlessly manipulate sequences in your code. Anything within backticks or grave accents `` will be treated as FASTA sequence data and create an array of sequence objects:
 
 ```perl6
 use BioInfo;
