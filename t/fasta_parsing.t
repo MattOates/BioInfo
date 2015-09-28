@@ -7,7 +7,7 @@ use BioInfo::IO::FileParser;
 
 {
     my $seqchan = BioInfo::IO::FileParser.new(file => 't_data/pdb_aa.fa', parser => BioInfo::Parser::FASTA);
-    isa_ok $seqchan, BioInfo::IO::FileParser, 'Created FASTA Sequence IO Channel successfully.';
+    isa-ok $seqchan, BioInfo::IO::FileParser, 'Created FASTA Sequence IO Channel successfully.';
 
     my $seq = $seqchan.get();
     ok $seq.id eq '101m_A', 'Seq object, ID is parsed correctly.';
