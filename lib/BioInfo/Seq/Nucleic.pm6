@@ -12,7 +12,7 @@ class BioInfo::Seq::Nucleic does BioInfo::Seq {
     has @.residues;
 
     method complement(:$reverse) {
-        my %comp = zip @.residues, (@.residues[2,3], @.residues[0,1]);
+        my %comp = @.residues Z=> (|@.residues[2,3], |@.residues[0,1]);
         my $seq = self.sequence;
         $seq = $seq.flip if $reverse;
         self.new(
@@ -28,8 +28,7 @@ class BioInfo::Seq::Nucleic does BioInfo::Seq {
 
         #Get all the combinations of bases that map to the @aminos ordering
         #TTT TTC TTA TTG TCT TCC ... GGT GGC GGA GGG
-            #my @codons = [X~] @.residues.item xx 3; #TODO work out why this no longer works?
-        my @codons = map *~*~*, (@.residues X @.residues X @.residues);
+        my @codons = [X~] @.residues.item xx 3;
 
         #Translation table
         #TODO add in the weirdy-beardy translation tables
