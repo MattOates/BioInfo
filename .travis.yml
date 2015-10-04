@@ -1,0 +1,4 @@
+language: perl6
+#install:
+#    - rakudobrew build-panda
+#    - panda install 
