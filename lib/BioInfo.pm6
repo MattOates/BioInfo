@@ -1,3 +1,4 @@
+use nqp;
 use QAST:from<NQP>;
  
 sub BioInfo::seq(Str $sequence) is export {
