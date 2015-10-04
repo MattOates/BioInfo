@@ -1,4 +1,4 @@
-BioInfo
+BioInfo [![Build Status](https://travis-ci.org/MattOates/BioInfo.svg?branch=master)](https://travis-ci.org/MattOates/BioInfo)
 =========
 
 BioInfo is a reimagining of bioinformatics libraries for Perl6 based on all the new goodies available such as parallel processing through Promises and Channels and well defined and extensible parsing with the use of Grammars. Not to be confused with the [bioperl6] project lead by [Chris Fields] which aims to be a reimplementation of the BioPerl API for Perl6. Checkout Chris' project for any serious business.
