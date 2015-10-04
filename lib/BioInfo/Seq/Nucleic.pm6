@@ -15,7 +15,7 @@ class BioInfo::Seq::Nucleic does BioInfo::Seq {
         my %comp = @.residues Z=> (|@.residues[2,3], |@.residues[0,1]);
         my $seq = self.sequence;
         $seq = $seq.flip if $reverse;
-        self.new(
+        return self.new(
             id => self.id, 
             comment => self.comment, 
             sequence => $seq.comb.map({%comp{$_}}).join
@@ -44,10 +44,10 @@ class BioInfo::Seq::Nucleic does BioInfo::Seq {
         #Create a map of the codons to amino acids
         #Anything non translatable like '-' or 'N' get mapped to X amino characters
         my %codon_table is default('X');
-        %codon_table = zip @codons, %aminos{$table}.list;
+        %codon_table = @codons Z=> %aminos{$table}.list;
 
         #Take all of the codons mapped to aminos and join them together
-        BioInfo::Seq::Amino.new(
+        return BioInfo::Seq::Amino.new(
             id => self.id,
             comment => self.comment,
             sequence => %codon_table{map *~*~*, $.sequence.uc.comb}.join
@@ -83,14 +83,14 @@ class BioInfo::Seq::Nucleic does BioInfo::Seq {
                 @frames.push($seq.translate) if $seq.sequence.chars >= $min-length;
             }
         }
-        @frames;
+        return @frames;
     }
 
     method six-frame-translate(:$min-length=1,:$break-on-stop) {
         my @frames;
-        push @frames, self.new(id => self.id ~ "/+", comment => self.comment, sequence => self.sequence).three-frame-translate(min-length=>$min-length) :break-on-stop($break-on-stop);
-        push @frames, self.new(id => self.id ~ "/-", comment => self.comment, sequence => self.sequence).three-frame-translate(min-length=>$min-length) :break-on-stop($break-on-stop) :negative;
-        @frames;
+        push @frames, |self.new(id => self.id ~ "/+", comment => self.comment, sequence => self.sequence).three-frame-translate(min-length=>$min-length) :break-on-stop($break-on-stop);
+        push @frames, |self.new(id => self.id ~ "/-", comment => self.comment, sequence => self.sequence).three-frame-translate(min-length=>$min-length) :break-on-stop($break-on-stop) :negative;
+        return @frames;
     }
 
 

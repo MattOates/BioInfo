@@ -19,8 +19,7 @@ use BioInfo::Seq::Amino;
     isa-ok $aa, BioInfo::Seq::Amino, 'Translating DNA created an Amino acid sequence.';
 
     ok +$aa == 734, 'Translated Amino acid sequence has the correct length when coerced to Numeric.';
-
-    ok $aa.Bag eqv ("M"=>16,"E"=>47,"D"=>38,"P"=>23,"L"=>96,"I"=>54,"G"=>37,"R"=>35,"S"=>46,"T"=>41,"V"=>51,"A"=>40,"H"=>6,"F"=>62,"Q"=>25,"K"=>27,"Y"=>34,"W"=>16,"N"=>29,"C"=>10,"*"=>1).Bag, 'Producing a Bag from a sequence yields the Amino acid composition as a bag model.';
+    ok $aa.Bag eqv ("P"=>23,"I"=>54,"S"=>46,"F"=>62,"Y"=>34,"C"=>10,""=>2,"L"=>96,"V"=>51,"Q"=>25,"E"=>47,"W"=>16,"G"=>37,"R"=>35,"T"=>41,"H"=>6,"K"=>27,"*"=>1,"M"=>16,"A"=>40,"D"=>38,"N"=>29).Bag, 'Producing a Bag from a sequence yields the Amino acid composition as a bag model.';
 
     my @orfs = $dna.three-frame-translate;
     ok +@orfs == 3, '3frame translating produces three Amino acid sequences, upto one for each frame.';
