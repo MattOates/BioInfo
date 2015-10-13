@@ -1,9 +1,25 @@
 {
     "name" : "BioInfo",
-    "version" : "0.0.1",
-    "description" : "Bioinformatics modules written specifically for Perl6. This is not BioPerl, for something that has a more compatible API checkout the module 'bioperl6' maintained by Chris Fields. These modules are biased towards working with amino acid sequences at the moment. Of general use is a non-blocking and concurrent FASTA parser for working with Perl6 Promises.",
+    "version" : "0.0.2",
+    "description" : "Bioinformatics modules written specifically for a Perl6 generation.",
     "author" : "Matt Oates",
-    "depends" : [ ],
+    "depends" : [ "Stats" ],
     "source-type" : "git",
-    "source-url" : "git://github.com/MattOates/BioInfo.git"
+    "source-url" : "git://github.com/MattOates/BioInfo.git",
+    "provides" : {
+        "BioInfo::IO::FileParser" : "lib/BioInfo/IO/FileParser.pm6",
+        "BioInfo::Parser::FASTA::Actions" : "lib/BioInfo/Parser/FASTA/Actions.pm6",
+        "BioInfo::Parser::FASTA::Grammar" : "lib/BioInfo/Parser/FASTA/Grammar.pm6",
+        "BioInfo::Parser::FASTA" : "lib/BioInfo/Parser/FASTA.pm6",
+        "BioInfo::Parser::Newick::Actions" : "lib/BioInfo/Parser/Newick/Actions.pm6",
+        "BioInfo::Parser::Newick::Grammar" : "lib/BioInfo/Parser/Newick/Grammar.pm6",
+        "BioInfo::Parser::Newick" : "lib/BioInfo/Parser/Newick.pm6",
+        "BioInfo::Parser" : "lib/BioInfo/Parser.pm6",
+        "BioInfo::Seq::Amino" : "lib/BioInfo/Seq/Amino.pm6",
+        "BioInfo::Seq::DNA" : "lib/BioInfo/Seq/DNA.pm6",
+        "BioInfo::Seq::Nucleic" : "lib/BioInfo/Seq/Nucleic.pm6",
+        "BioInfo::Seq::RNA" : "lib/BioInfo/Seq/RNA.pm6",
+        "BioInfo::Seq" : "lib/BioInfo/Seq.pm6",
+        "BioInfo" : "lib/BioInfo.pm6"
+    }
 }
