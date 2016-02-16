@@ -40,4 +40,4 @@ use BioInfo::Seq::Amino;
     ok +@orfs == 123, '6frame breaking-on-stop and filtering by min-length correct number of sequence objects.';
 }
 
-done;
+done-testing;
