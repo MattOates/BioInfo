@@ -88,8 +88,8 @@ class BioInfo::Seq::Nucleic does BioInfo::Seq {
 
     method six-frame-translate(:$min-length=1,:$break-on-stop) {
         my @frames;
-        push @frames, |self.new(id => self.id ~ "/+", comment => self.comment, sequence => self.sequence).three-frame-translate(min-length=>$min-length) :break-on-stop($break-on-stop);
-        push @frames, |self.new(id => self.id ~ "/-", comment => self.comment, sequence => self.sequence).three-frame-translate(min-length=>$min-length) :break-on-stop($break-on-stop) :negative;
+        append @frames, self.new(id => self.id ~ "/+", comment => self.comment, sequence => self.sequence).three-frame-translate(min-length=>$min-length) :break-on-stop($break-on-stop);
+        append @frames, self.new(id => self.id ~ "/-", comment => self.comment, sequence => self.sequence).three-frame-translate(min-length=>$min-length) :break-on-stop($break-on-stop) :negative;
         return @frames;
     }
 
