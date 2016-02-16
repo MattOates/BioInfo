@@ -10,4 +10,4 @@ use BioInfo::IO::FileParser;
     isa-ok $treechan, BioInfo::IO::FileParser, 'Created Newick File IO Channel successfully.';
 }
 
-done;
+done-testing;
