@@ -1,6 +1,6 @@
 {
     "name" : "BioInfo",
-    "version" : "0.0.2",
+    "version" : "0.3.0",
     "description" : "Bioinformatics modules written specifically for a Perl6 generation.",
     "author" : "Matt Oates",
     "depends" : [ "Stats" ],
