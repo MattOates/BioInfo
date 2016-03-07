@@ -10,7 +10,7 @@ sub BioInfo::seq(Str $sequence) is export {
 sub EXPORT(|) {
     role BioInfo::Grammar {
         token quote:sym<` `> {
-        '`' <bioseq> [ '`' || <.FAILGOAL: "Unable to parse bio sequence; couldn't find final '`'"> ]
+        '`' <bioseq> [ '`' || <.FAILGOAL: '`'> ]
         }
         token bioseq { <-[`]>* }
     }
