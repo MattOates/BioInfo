@@ -16,7 +16,7 @@ sub EXPORT(|) {
     }
  
     role BioInfo::Actions {
-        method quote:sym<` `>(Mu $/ is rw) {
+        method quote:sym<` `>($/) {
             my $seq := nqp::atkey(nqp::findmethod($/, 'hash')($/), 'bioseq');
             my $call := QAST::Op.new(
                                 :op<call>,
