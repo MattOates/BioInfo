@@ -12,10 +12,10 @@ role BioInfo::Seq {
     }
 
     multi method Str (BioInfo::Seq:D: --> Str) {
-        ">$.id $.comment\n$.sequence\n";
+        $.sequence;
     }
 
     multi method gist (BioInfo::Seq:D: --> Str) {
-        self.Str;
+        ">$.id $.comment\n$.sequence\n";
     }
 }
