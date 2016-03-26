@@ -18,4 +18,8 @@ role BioInfo::Seq {
     multi method gist (BioInfo::Seq:D: --> Str) {
         ">$.id $.comment\n$.sequence\n";
     }
+    
+    multi method perl (BioInfo::Seq:D: --> Str) {
+        "`>$.id $.comment\n$.sequence\n`";
+    }
 }
