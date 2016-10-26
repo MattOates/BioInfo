@@ -1,4 +1,5 @@
 {
+    "perl" : "6.*",
     "name" : "BioInfo",
     "version" : "0.4.3",
     "description" : "Bioinformatics modules written specifically for a Perl6 generation.",
