@@ -3,6 +3,8 @@
     "version" : "0.4.3",
     "description" : "Bioinformatics modules written specifically for a Perl6 generation.",
     "author" : "Matt Oates",
+    "tags" : [ "Bio", "Biology", "Science", "Bioinformatics", "Slang", "Parser" ],
+    "perl" : "6.c",
     "depends" : [ "Stats" ],
     "source-type" : "git",
     "source-url" : "git://github.com/MattOates/BioInfo.git",
