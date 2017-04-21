@@ -3,6 +3,9 @@ use Test;
 plan 2;
 
 use BioInfo;
+use BioInfo::Parser::FASTA::Grammar;
+use BioInfo::Parser::FASTA::Actions;
+use BioInfo::Seq::DNA;
 
 {
     my $dnastr = " 
