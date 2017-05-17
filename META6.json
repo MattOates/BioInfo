@@ -2,6 +2,7 @@
     "perl" : "6.*",
     "name" : "BioInfo",
     "version" : "0.4.3",
+    "license" : "Artistic-2.0",
     "description" : "Bioinformatics modules written specifically for a Perl6 generation.",
     "author" : "Matt Oates",
     "tags" : [ "Bio", "Biology", "Science", "Bioinformatics", "Slang", "Parser" ],
