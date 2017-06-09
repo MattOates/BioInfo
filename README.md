@@ -81,10 +81,10 @@ The previous example will output the protein sequence twice since the DNA was th
 
 Installation is quite simple at the moment, but might become more involved once third party software is involved.
 
-### With panda (part of the Rakudo* distribution)
-###### I havent added this to the Panda modules listings yet... When it is:
+### With zef (part of the Rakudo* distribution)
+
 ```sh
-panda install BioInfo
+zef install BioInfo
 perl6 -M BioInfo -e 'say BioInfo::Seq.new(id => "seq1", sequence => "MDADAFA");'
 ```
 
