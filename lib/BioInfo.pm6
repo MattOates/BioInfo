@@ -23,11 +23,20 @@ sub EXPORT(|) {
                                 :name<&BioInfo::seq>,
                                 QAST::SVal.new(:value($seq.Str))
                         );
-            $/.'!make'($call);
+            $/.make($call);
         }
     }
+
+
  
-    nqp::bindkey(%*LANG, 'MAIN', %*LANG<MAIN>.HOW.mixin(%*LANG<MAIN>, BioInfo::Grammar));
-    nqp::bindkey(%*LANG, 'MAIN-actions', %*LANG<MAIN-actions>.HOW.mixin(%*LANG<MAIN-actions>, BioInfo::Actions));
+    if $*PERL.compiler.version before v2017.03 { # old way
+        nqp::bindkey(%*LANG, 'MAIN', %*LANG<MAIN>.HOW.mixin(%*LANG<MAIN>, BioInfo::Grammar));
+        nqp::bindkey(%*LANG, 'MAIN-actions', %*LANG<MAIN-actions>.HOW.mixin(%*LANG<MAIN-actions>, BioInfo::Actions));
+    }
+    else { # new way
+        $ = $*LANG.define_slang('MAIN',
+            $*LANG.slang_grammar('MAIN').^mixin(BioInfo::Grammar),
+            $*LANG.actions.^mixin(BioInfo::Actions))
+    }
     {}
 } 
