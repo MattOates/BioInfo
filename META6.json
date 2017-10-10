@@ -1,5 +1,4 @@
 {
-    "perl" : "6.*",
     "name" : "BioInfo",
     "version" : "0.4.3",
     "license" : "Artistic-2.0",
